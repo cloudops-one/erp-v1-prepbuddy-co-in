@@ -798,6 +798,31 @@ def update_select_perm_after_install():
 	frappe.flags.update_select_perm_after_migrate = False
 
 
+def setup_custom_branding():
+	"""Reapply custom branding on every migrate so it survives a fresh bench new-site install."""
+	frappe.db.set_single_value(
+		"Navbar Settings",
+		"app_logo",
+		"https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/prepbuddy_hr_icon.png",
+	)
+	frappe.db.set_single_value(
+		"Website Settings",
+		"favicon",
+		"https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/favicon.ico",
+	)
+	if frappe.db.exists("Desktop Icon", "Frappe HR"):
+		frappe.db.set_value(
+			"Desktop Icon",
+			"Frappe HR",
+			{
+				"logo_url": "https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/prepbuddy_hr_icon.png",
+				"label": "HR",
+				"link": "/app/hr-setup",
+			},
+		)
+	frappe.db.commit()
+
+
 def delete_custom_fields(custom_fields: dict):
 	"""
 	:param custom_fields: a dict like `{'Salary Slip': [{fieldname: 'loans', ...}]}`
