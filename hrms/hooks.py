@@ -1,5 +1,5 @@
 app_name = "hrms"
-app_title = "Frappe HR"
+app_title = "HR"
 app_publisher = "Frappe Technologies Pvt. Ltd."
 app_description = "Modern HR and Payroll Software"
 app_email = "contact@frappe.io"
@@ -15,7 +15,7 @@ add_to_apps_screen = [
 	{
 		"name": "hrms",
 		"logo": "https://v2-prepbuddy-co-in.sgp1.digitaloceanspaces.com/public-v1-prepbuddy-co-in/portal_prepbuddy_logo.svg",
-		"title": "Frappe HR",
+		"title": "HR",
 		"route": app_home,
 		"has_permission": "hrms.hr.utils.check_app_permission",
 		"sequence_id": 2,
