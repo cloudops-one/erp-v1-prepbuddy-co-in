@@ -800,28 +800,25 @@ def update_select_perm_after_install():
 
 def setup_custom_branding():
 	"""Reapply custom branding on every migrate so it survives a fresh bench new-site install."""
-	frappe.db.set_single_value(
-		"Navbar Settings",
-		"app_logo",
-		"https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/prepbuddy_hr_icon.png",
-	)
-	frappe.db.set_single_value(
-		"Website Settings",
-		"favicon",
-		"https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/favicon.ico",
-	)
+	logo_url = "https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/prepbuddy_hr_icon.png"
+	favicon_url = "https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/favicon.ico"
+
+	frappe.db.set_single_value("Navbar Settings", "app_logo", logo_url)
+	frappe.db.set_single_value("Website Settings", "favicon", favicon_url)
+	# This is the field that drives the icon shown on the /login page
+	frappe.db.set_single_value("Website Settings", "app_logo", logo_url)
+
 	if frappe.db.exists("Desktop Icon", "Frappe HR"):
 		frappe.db.set_value(
 			"Desktop Icon",
 			"Frappe HR",
 			{
-				"logo_url": "https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/prepbuddy_hr_icon.png",
+				"logo_url": logo_url,
 				"label": "HR",
 				"link": "/app/hr-setup",
 			},
 		)
 	frappe.db.commit()
-
 
 def delete_custom_fields(custom_fields: dict):
 	"""
