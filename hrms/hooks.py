@@ -100,7 +100,10 @@ jinja = {
 # ------------
 
 # before_install = "hrms.install.before_install"
-after_install = "hrms.install.after_install"
+after_install = [
+	"hrms.install.after_install",
+	"hrms.setup.setup_custom_branding",
+]
 after_migrate = [
 	"hrms.setup.update_select_perm_after_install",
 	"hrms.setup.setup_custom_branding",
@@ -309,16 +312,7 @@ accounting_dimension_doctypes = [
 bank_reconciliation_doctypes = ["Expense Claim"]
 
 audit_trail_doctypes = ["Expense Claim", "Payroll Entry", "Salary Slip", "Leave Encashment", "Gratuity"]
-
-# Testing
-# -------
-
 before_tests = "hrms.tests.test_utils.before_tests"
-
-# Overriding Methods
-# -----------------------------
-
-# get matching queries for Bank Reconciliation
 get_matching_queries = "hrms.hr.utils.get_matching_queries"
 
 regional_overrides = {
@@ -328,8 +322,6 @@ regional_overrides = {
 		"hrms.hr.utils.calculate_tax_with_marginal_relief": "hrms.regional.india.utils.calculate_tax_with_marginal_relief",
 	},
 }
-
-# ERPNext doctypes for Global Search
 global_search_doctypes = {
 	"Default": [
 		{"doctype": "Salary Slip", "index": 19},
@@ -343,14 +335,6 @@ global_search_doctypes = {
 		{"doctype": "Appraisal", "index": 43},
 	],
 }
-
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "hrms.event.get_events"
-# }
-#
-# each overriding function accepts a `data` argument;
-# generated from the base implementation of the doctype dashboard,
-# along with any modifications made in other Frappe apps
 override_doctype_dashboards = {
 	"Employee": "hrms.overrides.dashboard_overrides.get_dashboard_for_employee",
 	"Holiday List": "hrms.overrides.dashboard_overrides.get_dashboard_for_holiday_list",
@@ -359,51 +343,8 @@ override_doctype_dashboards = {
 	"Timesheet": "hrms.overrides.dashboard_overrides.get_dashboard_for_timesheet",
 	"Bank Account": "hrms.overrides.dashboard_overrides.get_dashboard_for_bank_account",
 }
-
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
-
 ignore_links_on_delete = ["PWA Notification"]
 
-# User Data Protection
-# --------------------
-
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"hrms.auth.validate"
-# ]
-
-# Translation
-# --------------------------------
-
-# Make link fields search translated document names for these DocTypes
-# Recommended only for DocTypes which have limited documents with untranslated names
-# For example: Role, Gender, etc.
-# translated_search_doctypes = []
 
 company_data_to_be_ignored = [
 	"Salary Component Account",
@@ -416,8 +357,6 @@ company_data_to_be_ignored = [
 	"Employee Onboarding Template",
 	"Employee Separation Template",
 ]
-
-# List of apps whose translatable strings should be excluded from this app's translations.
 ignore_translatable_strings_from = ["frappe", "erpnext"]
 employee_holiday_list = ["hrms.utils.holiday_list.get_holiday_list_for_employee"]
 export_python_type_annotations = True
