@@ -2,8 +2,12 @@
 	<div class="h-12 bg-white border-b px-12 flex items-center">
 		<div class="flex items-center space-x-1.5">
 			<a href="/desk/hr-setup" class="text-gray-600 hover:text-gray-700 flex items-center">
-				<FrappeHRLogo class="h-6 w-6 mr-2.5" />
-				Frappe HR
+				<img
+					src="https://v2-prepbuddy-co-in.sgp1.cdn.digitaloceanspaces.com/public-v1-prepbuddy-co-in/prepbuddy_logo.png"
+					alt="PrepBuddy"
+					class="h-6 w-auto mr-2.5"
+				/>
+				PrepBuddy
 			</a>
 			<FeatherIcon name="chevron-right" class="h-4 w-4" />
 			<span class="font-medium">Roster</span>
@@ -37,7 +41,6 @@
 
 <script setup lang="ts">
 import { FeatherIcon, Dropdown, Avatar, createResource } from "frappe-ui";
-import FrappeHRLogo from "../icons/FrappeHRLogo.vue";
 
 import { User } from "../views/Home.vue";
 import { goTo, raiseToast } from "../utils";
